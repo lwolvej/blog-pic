@@ -51,6 +51,12 @@ jobs:
           delete-branch: true
           branch-suffix: timestamp
           reviewers: lwolvej
+      - name: Auto approve
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: juliangruber/approve-pull-request-action@v1.1.1
+        with:
+          github-token: ${{ secrets.BLOG_PIC_TOKEN }}
+          number: ${{ steps.cpr.outputs.pull-request-number }}
       - name: Enable Pull Request Automerge
         if: steps.cpr.outputs.pull-request-operation == 'created'
         uses: peter-evans/enable-pull-request-automerge@v2
