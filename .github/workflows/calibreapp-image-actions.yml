@@ -49,8 +49,8 @@ jobs:
           labels: |
             report
             automerge
-          reviewers: lwolvej
-          assignees: lwolvej
+          delete-branch: true
+          branch-suffix: timestamp
       - name: Pull Request Auto Merge
         if: steps.cpr.outputs.pull-request-operation == 'created'
         uses: ahmadnassri/action-dependabot-auto-merge@v2
