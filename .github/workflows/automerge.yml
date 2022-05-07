@@ -29,4 +29,3 @@ jobs:
           MERGE_LABELS: "automerge"
           MERGE_REMOVE_LABELS: "automerge"
           MERGE_DELETE_BRANCH: true
-          MERGE_REQUIRED_APPROVALS: "0"
