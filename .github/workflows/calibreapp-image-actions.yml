@@ -8,9 +8,16 @@ on:
       - '**.jpeg'
       - '**.png'
       - '**.webp'
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+      - synchronize
+      - opened
   workflow_dispatch:
   schedule:
     - cron: '30 2 1 * *'
+  status: {}
 jobs:
   build:
     name: calibreapp/image-actions
@@ -55,5 +62,8 @@ jobs:
         uses: "pascalgn/automerge-action@v0.15.2"
         env:
           GITHUB_TOKEN: "${{ secrets.BLOG_PIC_TOKEN }}"
+          MERGE_LABELS: "automerge"
+          MERGE_REMOVE_LABELS: "automerge"
           MERGE_DELETE_BRANCH: true
+          MERGE_REQUIRED_APPROVALS: "0"
 
