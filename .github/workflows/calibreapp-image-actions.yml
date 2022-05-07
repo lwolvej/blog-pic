@@ -46,7 +46,6 @@ jobs:
           commit-message: Compress Images
           body: ${{ steps.calibre.outputs.markdown }}
           labels: |
-            report
             automerge
           delete-branch: true
           branch-suffix: timestamp
