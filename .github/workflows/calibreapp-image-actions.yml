@@ -44,6 +44,7 @@ jobs:
         with:
           title: Auto Compress Images
           branch: image-compress
+          branch-suffix: timestamp
           commit-message: Compress Images
           body: ${{ steps.calibre.outputs.markdown }}
           labels: |
@@ -51,6 +52,7 @@ jobs:
             automated pr
           reviewers: lwolvej
           assignees: lwolvej
+          delete-branch: true
       - name: Pull Request Auto Merge
         if: steps.cpr.outputs.pull-request-operation == 'created'
         uses: peter-evans/enable-pull-request-automerge@v2
