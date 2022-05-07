@@ -56,5 +56,5 @@ jobs:
         with:
           token: ${{ secrets.BLOG_PIC_TOKEN }}
           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-          merge-method: squash
+          merge-method: merge
 
