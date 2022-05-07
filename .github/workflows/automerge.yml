@@ -1,24 +1,9 @@
 name: automerge
 on:
-  pull_request_target:
-    types:
-      - labeled
-      - unlabeled
-      - synchronize
-      - opened
-      - edited
-      - ready_for_review
-      - reopened
-      - unlocked
-  pull_request_review:
-    types:
-      - submitted
-  check_suite:
-    types:
+  workflow_run:
+    workflows: [Compress images]
+    types: 
       - completed
-  status: {}
-  schedule:
-    - cron: "30 1 * * *"
     
 jobs:
   automerge:
@@ -32,4 +17,3 @@ jobs:
           MERGE_LABELS: "automerge"
           MERGE_REMOVE_LABELS: "automerge"
           MERGE_DELETE_BRANCH: "true"
-          
