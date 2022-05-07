@@ -8,16 +8,9 @@ on:
       - '**.jpeg'
       - '**.png'
       - '**.webp'
-  pull_request:
-    types:
-      - labeled
-      - unlabeled
-      - synchronize
-      - opened
   workflow_dispatch:
   schedule:
     - cron: '30 2 1 * *'
-  status: {}
 jobs:
   build:
     name: calibreapp/image-actions
@@ -47,7 +40,6 @@ jobs:
           github.event_name != 'pull_request' &&
           steps.calibre.outputs.markdown != ''
         uses: peter-evans/create-pull-request@v4
-        id: cpr
         with:
           title: Auto Compress Images
           branch: image-compress
@@ -57,13 +49,4 @@ jobs:
             automerge
           delete-branch: true
           branch-suffix: timestamp
-      - name: Auto Merge
-        if: steps.cpr.outputs.pull-request-operation == 'created'
-        uses: "pascalgn/automerge-action@v0.15.2"
-        env:
-          GITHUB_TOKEN: "${{ secrets.BLOG_PIC_TOKEN }}"
-          MERGE_LABELS: "automerge"
-          MERGE_REMOVE_LABELS: "automerge"
-          MERGE_DELETE_BRANCH: true
-          MERGE_REQUIRED_APPROVALS: "0"
 
