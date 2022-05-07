@@ -17,6 +17,9 @@ on:
     types:
       - completed
   status: {}
+  schedule:
+    - cron: "30 1 * * *"
+    
 jobs:
   automerge:
     runs-on: ubuntu-latest
