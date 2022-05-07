@@ -8,6 +8,7 @@ on:
       - '**.jpeg'
       - '**.png'
       - '**.webp'
+  workflow_dispatch:
   schedule:
     - cron: '30 2 1 * *'
 jobs:
@@ -39,14 +40,21 @@ jobs:
           github.event_name != 'pull_request' &&
           steps.calibre.outputs.markdown != ''
         uses: peter-evans/create-pull-request@v4
+        id: cpr
         with:
           title: Auto Compress Images
           branch: image-compress
           commit-message: Compress Images
           body: ${{ steps.calibre.outputs.markdown }}
           labels: |
-            enhancement
             automerge
           delete-branch: true
           branch-suffix: timestamp
+      - name: Enable Pull Request Automerge
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ secrets.BLOG_PIC_TOKEN }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: squash
 
