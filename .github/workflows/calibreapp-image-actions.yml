@@ -50,6 +50,7 @@ jobs:
             automerge
           delete-branch: true
           branch-suffix: timestamp
+          reviewers: lwolvej
       - name: Enable Pull Request Automerge
         if: steps.cpr.outputs.pull-request-operation == 'created'
         uses: peter-evans/enable-pull-request-automerge@v2
