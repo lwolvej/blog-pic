@@ -43,16 +43,20 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           title: Auto Compress Images
-          branch-suffix: timestamp
+          branch: image-compress
           commit-message: Compress Images
           body: ${{ steps.calibre.outputs.markdown }}
-          label: |
-            enhancement
+          labels: |
+            report
             automated pr
+          reviewers: lwolvej
+          assignees: lwolvej
       - name: Pull Request Auto Merge
         if: steps.cpr.outputs.pull-request-operation == 'created'
         uses: peter-evans/enable-pull-request-automerge@v2
         with:
           token: ${{ secrets.BLOG_PIC_TOKEN }}
           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-          merge-method: merge
+          merge-method: squash
+
+
